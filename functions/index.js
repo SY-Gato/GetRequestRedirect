@@ -21,7 +21,8 @@ exports.handler = async function(event, context) {
   } catch (error) {
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Error fetching the URL. error: '+toString(error) })
+      body: JSON.stringify({ error: 'Error fetching the URL.', details: error.message || error })
+      //body: JSON.stringify({ error: 'Error fetching the URL.' })
     };
   }
 };
