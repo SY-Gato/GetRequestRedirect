@@ -1,4 +1,4 @@
-const fetch = require('node-fetch');
+/*const fetch = require('node-fetch');
 
 exports.handler = async function(event, context) {
   const url = event.queryStringParameters.url;
@@ -35,7 +35,7 @@ exports.handler = async function(event, context) {
         },
         body: base64version
         //body: base64Image  // Return base64 image data directly
-      };*/
+      };*//*
       const theblob = await response.blob();
       return {
         statusCode: 200,
@@ -58,11 +58,11 @@ exports.handler = async function(event, context) {
       body: JSON.stringify({ error: 'Error fetching the URL.', details: error.message || error })
     };
   }
-};
+};*/
 
 
 
-/*const fetch = require('node-fetch');
+const fetch = require('node-fetch');
 
 exports.handler = async function(event, context) {
   const url = event.queryStringParameters.url;
@@ -97,4 +97,4 @@ exports.handler = async function(event, context) {
       //body: JSON.stringify({ error: 'Error fetching the URL.' })
     };
   }
-};*/
+};
