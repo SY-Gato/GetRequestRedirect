@@ -24,7 +24,7 @@ exports.handler = async function(event, context) {
         body: JSON.stringify(data)  // Return as JSON
       };
     } else if (contentType && contentType.includes("image")) {
-      const buffer = await response.buffer();  // Get image data as a buffer
+      /*const buffer = await response.buffer();  // Get image data as a buffer
       //const base64Image = buffer.toString('base64');  // Convert to base64
       const base64version = await btoa(buffer);
       return {
@@ -35,6 +35,15 @@ exports.handler = async function(event, context) {
         },
         body: base64version
         //body: base64Image  // Return base64 image data directly
+      };*/
+      const theblob = await response.blob();
+      return {
+        statusCode: 200,
+        headers: {
+          "Content-Type": contentType,
+          "Content-Length": theblob.getBytes().length
+        },
+        body: theblob
       };
     } else {
       const data = await response.text();  // Get as text for other types
