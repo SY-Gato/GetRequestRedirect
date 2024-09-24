@@ -4,7 +4,8 @@
   "description": "A proxy function for Netlify",
   "main": "functions/index.js",
   "scripts": {
-    "start": "netlify dev"
+    "start": "netlify dev",
+    "build": "echo 'No build required.'"
   },
   "dependencies": {
     "@types/node": "^18.0.6",
