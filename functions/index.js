@@ -40,8 +40,7 @@ exports.handler = async function(event, context) {
       return {
         statusCode: 200,
         headers: {
-          "Content-Type": contentType,
-          "Content-Length": theblob.getBytes().length
+          "Content-Type": contentType
         },
         body: theblob
       };
