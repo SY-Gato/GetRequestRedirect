@@ -1,1 +1,11 @@
+[build]
+  command = "npm run build" # Replace this with your build command if necessary
+  functions = "functions/"  # Path to your serverless functions directory
+[functions]
+  directory = "functions/"
 
+[dev]
+  command = "npm run start"  # Replace this with your development server command if necessary
+  port = 8080  # Replace this with the port your development server runs on
+
+  
