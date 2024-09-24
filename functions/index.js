@@ -15,6 +15,7 @@ exports.handler = async function(event, context) {
 
     // Get the content type of the response
     const contentType = response.headers.get("content-type");
+    console.log(contentType);
     
     if (contentType && contentType.includes("image")) {
       const buffer = await response.buffer();  // Get image data as a buffer
