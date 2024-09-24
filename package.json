@@ -1,0 +1,13 @@
+{
+  "name": "getrequestredirect",
+  "version": "1.0.0",
+  "description": "A proxy function for Netlify",
+  "main": "index.js",
+  "scripts": {
+    "start": "netlify dev"
+  },
+  "dependencies": {
+    "@types/node": "^18.0.6",
+    "node-fetch": "^2.6.1"
+  }
+}
