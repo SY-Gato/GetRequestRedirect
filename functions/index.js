@@ -12,31 +12,29 @@ exports.handler = async function(event, context) {
 
   try {
     const response = await fetch(url);
-    
+
     // Get the content type of the response
     const contentType = response.headers.get("content-type");
     
-    let data;
-    
-    if (contentType && contentType.includes("application/json")) {
-      data = await response.json();  // Parse as JSON
-      return {
-        statusCode: 200,
-        body: JSON.stringify(data)  // Return as JSON
-      };
-    } else if (contentType && contentType.includes("image")) {
+    if (contentType && contentType.includes("image")) {
       const buffer = await response.buffer();  // Get image data as a buffer
       const base64Image = buffer.toString('base64');  // Convert to base64
       return {
         statusCode: 200,
         headers: {
-          "Content-Type": contentType,
+          "Content-Type": contentType,  // Set correct content type for the response
           "Content-Length": buffer.length
         },
         body: base64Image  // Return base64 image data directly
       };
+    } else if (contentType && contentType.includes("application/json")) {
+      const data = await response.json();  // Parse as JSON
+      return {
+        statusCode: 200,
+        body: JSON.stringify(data)  // Return as JSON
+      };
     } else {
-      data = await response.text();  // Get as text for other types
+      const data = await response.text();  // Get as text for other types
       return {
         statusCode: 200,
         body: data  // Return as plain text
@@ -50,6 +48,7 @@ exports.handler = async function(event, context) {
     };
   }
 };
+
 
 
 /*const fetch = require('node-fetch');
