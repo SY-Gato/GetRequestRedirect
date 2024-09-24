@@ -19,14 +19,15 @@ exports.handler = async function(event, context) {
     
     if (contentType && contentType.includes("image")) {
       const buffer = await response.buffer();  // Get image data as a buffer
-      const base64Image = buffer.toString('base64');  // Convert to base64
+      //const base64Image = buffer.toString('base64');  // Convert to base64
       return {
         statusCode: 200,
         headers: {
           "Content-Type": contentType,  // Set correct content type for the response
           "Content-Length": buffer.length
         },
-        body: base64Image  // Return base64 image data directly
+        body: buffer
+        //body: base64Image  // Return base64 image data directly
       };
     } else if (contentType && contentType.includes("application/json")) {
       const data = await response.json();  // Parse as JSON
