@@ -13,6 +13,7 @@ exports.handler = async function(event, context) {
   try {
     const response = await fetch(url);
     //const data = await response.json();
+    const contentType = response.headers.get("content-type")
     let data;
 
     if (contentType && contentType.includes("application/json")) {
