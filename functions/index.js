@@ -67,7 +67,9 @@ const fetch = require('node-fetch');
 exports.handler = async function(event, context) {
   const url = event.queryStringParameters.url;
   const other = event.queryStringParameters.replacenl;//new URL(event.url).searchParams.has("replacenl");
+  const ip = event.headers.get("x-forwarded-for");
   console.log(other);
+  console.log(ip);
   if (other == null) {
     console.log("Not Replacing Newline Characters.");
   }
