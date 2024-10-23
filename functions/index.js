@@ -68,6 +68,9 @@ exports.handler = async function(event, context) {
   const url = event.queryStringParameters.url;
   const other = event.queryStringParameters.replacenl;//new URL(event.url).searchParams.has("replacenl");
   console.log(other);
+  if (!other) {
+    console.log("NONE");
+  }
 
   if (!url) {
     return {
