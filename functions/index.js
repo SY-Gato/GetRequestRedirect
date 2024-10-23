@@ -66,7 +66,8 @@ const fetch = require('node-fetch');
 
 exports.handler = async function(event, context) {
   const url = event.queryStringParameters.url;
-  const other = event.queryStringParameters.replacenl;
+  const other = new URL(event.url).searchParams.has("replacenl");
+  console.log(other);
 
   if (!url) {
     return {
@@ -82,14 +83,14 @@ exports.handler = async function(event, context) {
     let data;
 
     if (contentType && contentType.includes("application/json")) {
-      data = await response.json();  // Parse as JSON if the response is JSON
+        data = await response.json(); // Parse as JSON if the response is JSON
     } else {
       data = await response.text();  // Otherwise, return as plain text (e.g., HTML)
     }
 
     return {
       statusCode: 200,
-      body: JSON.stringify(data)
+      body: (other == null) JSON.stringify(data)
     };
   } catch (error) {
     return {
