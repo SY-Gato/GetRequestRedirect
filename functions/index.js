@@ -66,7 +66,7 @@ const fetch = require('node-fetch');
 
 exports.handler = async function(event, context) {
   const url = event.queryStringParameters.url;
-  const other = event;//new URL(event.url).searchParams.has("replacenl");
+  const other = event.queryStringParameters.contains('replacenl');//new URL(event.url).searchParams.has("replacenl");
   console.log(other);
 
   if (!url) {
