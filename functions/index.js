@@ -90,7 +90,7 @@ exports.handler = async function(event, context) {
 
     return {
       statusCode: 200,
-      body: (other == null) JSON.stringify(data)
+      body: JSON.stringify(data)
     };
   } catch (error) {
     return {
