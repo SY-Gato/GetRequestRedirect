@@ -66,6 +66,7 @@ const fetch = require('node-fetch');
 
 exports.handler = async function(event, context) {
   const url = event.queryStringParameters.url;
+  const other = event.queryStringParameters.replacenl;
 
   if (!url) {
     return {
