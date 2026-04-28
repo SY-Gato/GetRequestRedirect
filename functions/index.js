@@ -1,0 +1,98 @@
+const fetch = require('node-fetch');
+
+exports.handler = async function(event, context) {
+  const url = event.queryStringParameters.url;
+  const other = event.queryStringParameters.replacenl;//new URL(event.url).searchParams.has("replacenl");
+  const ip = event.headers["x-forwarded-for"];
+  console.log(other);
+  console.log(ip);
+  if (other == null) {
+    console.log("Not Replacing Newline Characters.");
+  }
+
+  if (!url) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({ error: 'No URL specified' })
+    };
+  }
+
+  try {
+    const response = await fetch(url);
+    //const data = await response.json();
+    const contentType = response.headers.get("content-type")
+    // let data;
+    // let outData = 
+    // let outBody = {};
+    let outBody = {
+      contentType: contentType,
+      statusCode: response.status,
+      
+    };
+
+    /*if (contentType && contentType.includes("application/json")) {
+      // data = await response.json(); // Parse as JSON if the response is JSON
+      outBody.data = await response.json();
+      outBody.isJSON = true;
+    } else {
+      // data = await response.text();  // Otherwise, return as plain text (e.g., HTML)
+      
+    }*/
+
+    // const mainTypes = ["application/json", "text/plain", "text/html"
+    // const mainTypes = ["application/json", "text/plain", "text/html";
+    const mainTypes = ["application/json", "text/plain", "text/html"];
+
+    outBody.isJSON = false;
+    
+    //if (contentType) {
+      /*const ctype = mainTypes.find((type1) => contentType.includes(type1));
+      if (ctype) {
+        switch (ctype) {
+          case "application/json":
+            outBody.isJSON = true;
+            outBody.data = await response.json();
+            break;
+          case "text/plain":
+            outBody.plainText = true;
+            outBody.data = await response.text();
+            break;
+          case "text/html":
+            
+        }
+      }*/
+      /*if (contentType.includes("application/json")) {
+        outBody.isJSON = true;
+        outBody.data = await response.json();
+      }
+    }*/
+    // outBody.data = await response
+    // if (contentType &&.contentType.includes("application/json")) {
+    if (contentType && contentType.includes("application/json")) {
+      outBody.isJSON = true;
+      outBody.data = await response.json();
+    } else {
+      outBody.isJSON = false;
+      outBody.data = await response.text();
+    }
+
+    
+
+    /*return {
+      statusCode: 200,
+      body: JSON.stringify(data)
+    }; */
+    // return { statusCode
+    return {
+      statusCode: 200,
+      // data: JSON.stringify(outBody)
+      body: JSON.stringify(outBody)
+    };
+  } catch (error) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: 'Error fetching the URL.', details: error.message || error })
+      //body: JSON.stringify({ error: 'Error fetching the URL.' })
+    };
+  }
+};
