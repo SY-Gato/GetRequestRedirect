@@ -1,6 +1,8 @@
 const axios = require('axios');
 const fetch = require('node-fetch');
 
+const process = require("node:process");
+
 // Source - https://stackoverflow.com/a/18650828
 // Posted by anon, modified by community. See post 'Timeline' for change history
 // Retrieved 2026-04-28, License - CC BY-SA 4.0
