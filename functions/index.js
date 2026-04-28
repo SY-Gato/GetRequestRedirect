@@ -34,7 +34,8 @@ exports.handler = async function(event, context) {
       res = await axios.get(url, {
       timeout: 30000,
       validateStatus: function (status) {
-        return stats >= 200 && status < 300;
+        // return stats >= 200 && status < 300;
+        return status >= 200 && status < 300;
       },
       //maxContentLength: mxCLength,
       //maxBodyLength: mxBodyLen,
