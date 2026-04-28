@@ -18,6 +18,10 @@ exports.handler = async function(event, context) {
   }
 
   try {
+    // const mxCLength: 99999;
+    const mxCLength = 99999;
+    const mxBodyLen = 99999;
+    
     // const response = await fetch(url);
     // const response = await fetch(
     // const res = await axios.get(
