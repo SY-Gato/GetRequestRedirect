@@ -48,10 +48,13 @@ Download: ${download}`);
       },
       signal: new AbortController().signal,
     });
-      const response = res;
     } else {
       res = await fetch(url);
     }
+      const response = res;
+    //} else {
+    //  res = await fetch(url);
+    //}
     //const data = await response.json();
     const contentType = response.headers.get("content-type")
     // let data;
