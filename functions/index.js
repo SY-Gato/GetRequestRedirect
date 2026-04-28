@@ -39,7 +39,7 @@ exports.handler = async function(event, context) {
     // const response = await fetch(
     // const res = await axios.get(
     // const res = await axios.get(url, {
-    let res;
+    // let res;
     let response;
     // const useAxios = false
     const useAxios = true;
@@ -168,18 +168,23 @@ Download: ${download}`);
       // outBody.data = await response.json();
       if (useAxios) {
         outBody.data = response.data;
+        response = null;
       } else {
         outBody.data = await response.json();
+        response = null;
       }
     } else {
       outBody.isJSON = false;
       // outBody.data = await response.text();
       if (useAxios) {
         outBody.data = response.data;
+        response = null;
       } else {
         outBody.data = await response.text();
+        response = null;
       }
     }
+    global.gc();
     lmu();
 
     
