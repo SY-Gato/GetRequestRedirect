@@ -31,7 +31,8 @@ exports.handler = async function(event, context) {
     // const useAxios = false
     const useAxios = true;
     if (useAxios) {
-      res = await axios.get(url, {
+      // res = await axios.get(url, {
+      const res1 = await axios.get(url, {
       timeout: 30000,
       validateStatus: function (status) {
         // return stats >= 200 && status < 300;
@@ -50,6 +51,28 @@ Download: ${download}`);
       },
       signal: new AbortController().signal,
     });
+      const a11 = res1.headers.get("content-type");
+      /*res = {
+        // headers: res1.headers
+        // headers: res1.header
+        headers: res1.headers,
+        
+      };*/
+      res = {
+        // headers: res1.headers
+        // headers: res1.header
+        headers: res1.headers,
+        status: res1.status,
+        text: async () => {
+          
+          // return res1.data;
+          return res1.data;
+        },
+        json: async () => {
+          return JSON.parse(res1.data);
+        },
+      };
+      console.log(res1.data);
     } else {
       res = await fetch(url);
     }
