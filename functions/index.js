@@ -28,7 +28,8 @@ exports.handler = async function(event, context) {
     // const res = await axios.get(
     // const res = await axios.get(url, {
     let res;
-    const useAxios = false
+    // const useAxios = false
+    const useAxios = true;
     if (useAxios) {
       res = await axios.get(url, {
       timeout: 30000,
