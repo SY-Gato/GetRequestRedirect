@@ -9,6 +9,9 @@ const process = require("node:process");
 
 function formatBytes(a,b=2){if(!+a)return"0 Bytes";const c=0>b?0:b,d=Math.floor(Math.log(a)/Math.log(1024));return`${parseFloat((a/Math.pow(1024,d)).toFixed(c))} ${["Bytes","KiB","MiB","GiB","TiB","PiB","EiB","ZiB","YiB"][d]}`}
 
+function lmu() {
+  console.info(process.memoryUsage());
+}
 
 exports.handler = async function(event, context) {
   const url = event.queryStringParameters.url;
@@ -37,11 +40,13 @@ exports.handler = async function(event, context) {
     // const res = await axios.get(
     // const res = await axios.get(url, {
     let res;
+    let response;
     // const useAxios = false
     const useAxios = true;
     if (useAxios) {
       // res = await axios.get(url, {
-      const res1 = await axios.get(url, {
+      // const res1 = await axios.get(url, {
+      let res1 = await axios.get(url, {
       timeout: 30000,
       validateStatus: function (status) {
         // return stats >= 200 && status < 300;
@@ -91,11 +96,14 @@ Download: ${download}`);
         },
       };
       console.log(res1.data);*/
-      res = res1;
+      // res = res1;
+      response = res1;
+      res1 = null;
     } else {
-      res = await fetch(url);
+      // res = await fetch(url);
+      response = await fetch(url);
     }
-      const response = res;
+      // const response = res;
     //} else {
     //  res = await fetch(url);
     //}
@@ -110,6 +118,7 @@ Download: ${download}`);
       statusCode: response.status,
       
     };
+    lmu();
     //} else {
     //  res = await fetch(url);
     //}
@@ -128,7 +137,9 @@ Download: ${download}`);
     const mainTypes = ["application/json", "text/plain", "text/html"];
 
     outBody.isJSON = false;
-    
+
+    // lm();
+    lmu();
     //if (contentType) {
       /*const ctype = mainTypes.find((type1) => contentType.includes(type1));
       if (ctype) {
@@ -169,6 +180,7 @@ Download: ${download}`);
         outBody.data = await response.text();
       }
     }
+    lmu();
 
     
 
