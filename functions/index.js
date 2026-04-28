@@ -62,6 +62,8 @@ Bytes: ${bytes} (${formatBytes(bytes)})
 Estimated: ${estimated}
 Rate: ${rate}
 Download: ${download}`);
+       // console.log(
+        console.info(process.memoryUsage());
       },
       signal: new AbortController().signal,
     });
