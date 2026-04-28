@@ -49,6 +49,9 @@ Download: ${download}`);
       signal: new AbortController().signal,
     });
       const response = res;
+    } else {
+      res = await fetch(url);
+    }
     //const data = await response.json();
     const contentType = response.headers.get("content-type")
     // let data;
@@ -59,9 +62,9 @@ Download: ${download}`);
       statusCode: response.status,
       
     };
-    } else {
-      res = await fetch(url);
-    }
+    //} else {
+    //  res = await fetch(url);
+    //}
 
     /*if (contentType && contentType.includes("application/json")) {
       // data = await response.json(); // Parse as JSON if the response is JSON
