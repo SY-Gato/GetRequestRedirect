@@ -1,4 +1,5 @@
 const axios = require('axios');
+const fetch = require('node-fetch');
 
 exports.handler = async function(event, context) {
   const url = event.queryStringParameters.url;
@@ -25,7 +26,11 @@ exports.handler = async function(event, context) {
     // const response = await fetch(url);
     // const response = await fetch(
     // const res = await axios.get(
-    const res = await axios.get(url, {
+    // const res = await axios.get(url, {
+    let res;
+    const useAxios = false
+    if (useAxios) {
+      res = await axios.get(url, {
       timeout: 30000,
       validateStatus: function (status) {
         return stats >= 200 && status < 300;
@@ -53,6 +58,9 @@ Download: ${download}`);
       statusCode: response.status,
       
     };
+    } else {
+      res = await fetch(url);
+    }
 
     /*if (contentType && contentType.includes("application/json")) {
       // data = await response.json(); // Parse as JSON if the response is JSON
