@@ -48,6 +48,7 @@ Download: ${download}`);
       },
       signal: new AbortController().signal,
     });
+      const response = res;
     //const data = await response.json();
     const contentType = response.headers.get("content-type")
     // let data;
