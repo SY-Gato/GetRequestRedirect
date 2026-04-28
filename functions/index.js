@@ -30,8 +30,8 @@ exports.handler = async function(event, context) {
       validateStatus: function (status) {
         return stats >= 200 && status < 300;
       },
-      maxContentLength: mxCLength,
-      maxBodyLength: mxBodyLen,
+      //maxContentLength: mxCLength,
+      //maxBodyLength: mxBodyLen,
       onDownloadProgress: function ({loaded, total, progress, bytes, estimated, rate, download = true}) {
         console.info(`Loaded: ${loaded}
 Total: ${total}
