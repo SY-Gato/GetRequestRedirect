@@ -52,7 +52,8 @@ exports.handler = async function(event, context) {
     const outDt = await axios.get(url, {
       timeout: 30000,
       validateStatus: function (status) {
-        return stats >= 200 && status < 300;
+        // return stats >= 200 && status < 300;
+        return status >= 200 && status < 300;
       },
       signal: new AbortController().signal,
       decompress: false,
