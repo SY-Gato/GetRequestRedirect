@@ -62,16 +62,19 @@ exports.handler = async function(event, context) {
       responseType: "stream",
     });
     console.log(typeof(outDt.data));
+    // console.log(outDt.data instanceof Stream);
+    console.log(outDt.data instanceof ReadableStream);
+    console.log(outDt.data instanceof WritableStream);
     lmu();
     /*await new Promise((res) => {
       outDt.data.on("end", () => {res();});
     });*/
-    await new Promise((thisRes) => {
+    /*await new Promise((thisRes) => {
       outDt.data.on("end", () => {
         // res();
         thisRes();
       });
-    });
+    });*/
     lmu();
 
 
