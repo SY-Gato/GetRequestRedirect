@@ -81,6 +81,8 @@ exports.handler = async function(event, context) {
     let outBody = {
       data: "hi",
     };
+
+    let newReadAble = new ReadableStream(outDt.data);
   
     /*return {
       statusCode: 200,
@@ -105,9 +107,14 @@ exports.handler = async function(event, context) {
       },
     });
     return res_1;*/
-    return {
+    /*return {
       statusCode: 200,
       body: outDt.data.getReader(),
+    };*/
+    return {
+      statusCode: 200,
+      // body: new ReadableStream(outD
+      body: newReadAble,
     };
   } catch (error) {
     return {
