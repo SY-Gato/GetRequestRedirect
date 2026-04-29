@@ -144,10 +144,12 @@ Download: ${download}`);
           },
         },
       };
-      res1 = null;
+      // res1 = null;
+      res1 = undefined;
       //chunks = null;
       chunks.length = 0;
-      
+      gc();
+      global.gc();
     } else {
       // res = await fetch(url);
       response = await fetch(url);
