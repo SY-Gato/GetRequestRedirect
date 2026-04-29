@@ -46,8 +46,8 @@ exports.handler = async function(event, context) {
     if (useAxios) {
       // res = await axios.get(url, {
       // const res1 = await axios.get(url, {
-      // let res1 = await axios.get(url, {
-      response = await axios.get(url, {
+      let res1 = await axios.get(url, {
+      //response = await axios.get(url, {
       timeout: 30000,
       validateStatus: function (status) {
         // return stats >= 200 && status < 300;
@@ -102,8 +102,8 @@ Download: ${download}`);
       // res = res1;
       //let chunks = [];
       let chunks = [];
-      // res1.data.on("data", chunk => {
-      response.data.on("data", chunk => {
+      res1.data.on("data", chunk => {
+      //response.data.on("data", chunk => {
         chunks.push(chunk);
         // res1.data = {};
         //console.log(typeof(res1.data));
@@ -111,8 +111,8 @@ Download: ${download}`);
       await new Promise((res) => {
         // res
         // res1.on("end", () => {
-        // res1.data.on("end", () => {
-        response.data.on("end", () => {
+        res1.data.on("end", () => {
+        //response.data.on("end", () => {
           console.log("ENDED");
           res();
         });
@@ -127,14 +127,24 @@ Download: ${download}`);
         data: chunks.join(""),
         headers: res1.headers,
       };*/
-      response = {
+      /*response = {
         status: response.status + 1 - 1,
         data: chunks.join(""),
         headers: {
           "content-type": `${response.headers.get("content-type")}`,
         },
+      };*/
+      response = {
+        status: res1.status + 1 - 1,
+        data: chunks.join(""),
+        headers: {
+          "content-type": `${res1.headers.get("content-type")}`,
+          get: function(id) {
+            return this[id];
+          },
+        },
       };
-      //res1 = null;
+      res1 = null;
       //chunks = null;
       chunks.length = 0;
       
