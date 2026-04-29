@@ -108,7 +108,8 @@ Download: ${download}`);
       });
       await new Promise((res) => {
         // res
-        res1.on("end", () => {
+        // res1.on("end", () => {
+        res1.data.on("end", () => {
           console.log("ENDED");
           res();
         });
