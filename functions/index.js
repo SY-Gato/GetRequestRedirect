@@ -88,7 +88,11 @@ exports.handler = async function(event, context) {
       body: JSON.stringify(outBody)
     };*/
     //re
-    return new Response(outDt.data);
+    // return new Response(outDt.data);
+    return {
+      statusCode: 200,
+      body: outDt.data
+    };
   } catch (error) {
     return {
       statusCode: 500,
