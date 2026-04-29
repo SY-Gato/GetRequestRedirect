@@ -74,6 +74,7 @@ Download: ${download}`);
       },
       signal: new AbortController().signal,
       decompress: false,
+      responseType: "stream",
     });
       const a11 = res1.headers.get("content-type");
       /*res = {
@@ -98,8 +99,27 @@ Download: ${download}`);
       };
       console.log(res1.data);*/
       // res = res1;
-      response = res1;
+      //let chunks = [];
+      let chunks = [];
+      res1.data.on("data", chunk => {
+        chunks.push(chunk);
+        // res1.data = {};
+        console.log(typeof(res1.data));
+      });
+      await new Promise((res) => {
+        // res
+        res1.on("end", () => {
+          console.log("ENDED");
+          res();
+        });
+      });
+      
+      //response = res1;
+      //res1 = null;
+      response = chunks.join("");
       res1 = null;
+      chunks = null;
+      
     } else {
       // res = await fetch(url);
       response = await fetch(url);
@@ -164,7 +184,7 @@ Download: ${download}`);
     }*/
     // outBody.data = await response
     // if (contentType &&.contentType.includes("application/json")) {
-    if (contentType && contentType.includes("application/json")) {
+    /*if (contentType && contentType.includes("application/json")) {
       outBody.isJSON = true;
       // outBody.data = await response.json();
       if (useAxios) {
@@ -184,9 +204,15 @@ Download: ${download}`);
         outBody.data = await response.text();
         response = null;
       }
-    }
+    }*/
+    if (contentType && contentType.includes("application/json")) outBody.isJSON = true;
     //global.gc();
     lmu();
+    if (useAxios) {
+      
+    } else {
+      outBody.data = await response.text();
+    }
 
     
 
