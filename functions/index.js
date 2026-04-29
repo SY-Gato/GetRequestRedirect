@@ -117,7 +117,13 @@ Download: ${download}`);
       
       //response = res1;
       //res1 = null;
-      response = chunks.join("");
+      // response = chunks.join("");
+      // respones = {
+      response = {
+        status: res1.status,
+        data: chunks.join(""),
+        headers: res1.headers,
+      };
       res1 = null;
       chunks = null;
       
@@ -210,7 +216,8 @@ Download: ${download}`);
     //global.gc();
     lmu();
     if (useAxios) {
-      
+
+      outBody.data = response.data;
     } else {
       outBody.data = await response.text();
     }
