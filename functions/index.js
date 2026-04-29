@@ -102,6 +102,9 @@ exports.handler = async function(event, context) {
     //let newReadAble = new ReadableStream(
     let newReadAble = new ReadableStream(outDt);
 
+    newReadAble.on("data", (chunk) => {
+      console.log(typeof(chunk));
+    });
     
     
     lmu();
