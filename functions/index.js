@@ -45,11 +45,13 @@ exports.handler = async function(event, context) {
   }
 
   try {
+    lmu();
     const mxCLength = 99999;
     const mxBodyLen = 99999;
     // let response;
     // const useAxios = false
-    const outDt = await axios.get(url, {
+    // const outDt = await axios.get(url, {
+    let outDt = await axios.get(url, {
       timeout: 30000,
       validateStatus: function (status) {
         // return stats >= 200 && status < 300;
@@ -61,8 +63,14 @@ exports.handler = async function(event, context) {
     });
     console.log(typeof(outDt.data));
     lmu();
-    await new Promise((res) => {
+    /*await new Promise((res) => {
       outDt.data.on("end", () => {res();});
+    });*/
+    await new Promise((thisRes) => {
+      outDt.data.on("end", () => {
+        // res();
+        thisRes();
+      });
     });
     lmu();
 
@@ -70,7 +78,7 @@ exports.handler = async function(event, context) {
     let outBody = {
       data: "hi",
     };
-    
+  
     return {
       statusCode: 200,
       // data: JSON.stringify(outBody)
