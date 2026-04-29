@@ -106,7 +106,7 @@ Download: ${download}`);
       response.data.on("data", chunk => {
         chunks.push(chunk);
         // res1.data = {};
-        console.log(typeof(res1.data));
+        //console.log(typeof(res1.data));
       });
       await new Promise((res) => {
         // res
