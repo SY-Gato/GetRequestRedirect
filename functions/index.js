@@ -77,7 +77,7 @@ Download: ${download}`);
       decompress: false,
       responseType: "stream",
     });
-      const a11 = res1.headers.get("content-type");
+      //const a11 = res1.headers.get("content-type");
       /*res = {
         // headers: res1.headers
         // headers: res1.header
