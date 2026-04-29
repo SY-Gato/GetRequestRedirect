@@ -48,6 +48,7 @@ exports.handler = async function(event, context) {
     lmu();
     const mxCLength = 99999;
     const mxBodyLen = 99999;
+    let newReadAble = new ReadableStream();
     // let response;
     // const useAxios = false
     // const outDt = await axios.get(url, {
@@ -65,6 +66,34 @@ exports.handler = async function(event, context) {
     // console.log(outDt.data instanceof Stream);
     console.log(outDt.data instanceof ReadableStream);
     console.log(outDt.data instanceof WritableStream);
+
+    let chunks = [];
+    outDt.data.on("data", chunk => {
+      // chunks.push(chunk);
+      // chunks.push(`${chunk}`);
+      const chunkStr = `${chunk}`;
+      /*if (newReadAble.push(chunkStr)) {
+      }*/
+      if (chunks.length == 0) {
+        if (newReadAble.push(chunkStr)) {
+        } else {
+          chunks.push(chunkStr);
+        }
+      // }
+      if (chunks.length
+      
+    });
+
+    await new Promise((res) => {
+      let canEnd = false;
+      outDt.data.on("end", () => {
+        canEnd = true;
+      });
+      /*while (true) {
+      }*/
+      
+    });
+    
     lmu();
     /*await new Promise((res) => {
       outDt.data.on("end", () => {res();});
@@ -82,7 +111,7 @@ exports.handler = async function(event, context) {
       data: "hi",
     };
 
-    let newReadAble = new ReadableStream(outDt.data);
+    // let newReadAble = new ReadableStream(outDt.data);
   
     /*return {
       statusCode: 200,
