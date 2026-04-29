@@ -48,7 +48,7 @@ exports.handler = async function(event, context) {
     lmu();
     const mxCLength = 99999;
     const mxBodyLen = 99999;
-    let newReadAble = new ReadableStream();
+    // let newReadAble = new ReadableStream();
     // let response;
     // const useAxios = false
     // const outDt = await axios.get(url, {
@@ -61,20 +61,23 @@ exports.handler = async function(event, context) {
       signal: new AbortController().signal,
       decompress: false,
       responseType: "stream",
+      transformResponse: function (res) {
+        return res; // No change
+      },
     });
     console.log(typeof(outDt.data));
     // console.log(outDt.data instanceof Stream);
     console.log(outDt.data instanceof ReadableStream);
     console.log(outDt.data instanceof WritableStream);
 
-    let chunks = [];
+    /*let chunks = [];
     outDt.data.on("data", chunk => {
       // chunks.push(chunk);
       // chunks.push(`${chunk}`);
       const chunkStr = `${chunk}`;
       /*if (newReadAble.push(chunkStr)) {
       }*/
-      if (chunks.length == 0) {
+      /*if (chunks.length == 0) {
         if (newReadAble.push(chunkStr)) {
         } else {
           chunks.push(chunkStr);
@@ -90,9 +93,16 @@ exports.handler = async function(event, context) {
         canEnd = true;
       });
       /*while (true) {
-      }*/
+      }*//*
       
-    });
+    });*/
+
+    //let 
+    // let ready
+    //let newReadAble = new ReadableStream(
+    let newReadAble = new ReadableStream(outDt);
+
+    
     
     lmu();
     /*await new Promise((res) => {
