@@ -97,14 +97,18 @@ exports.handler = async function(event, context) {
       statusCode: 200,
       // body: JSON.stringify(outDt.data),
     };*/
-    let res_1 = new Response(outDt.data, {
+    /*let res_1 = new Response(outDt.data, {
       status: 200,
       headers: {
         // "content-type": outDt.headers.get("content-type"),
         "content-type": `${outDt.headers.get("content-type")}`,
       },
     });
-    return res_1;
+    return res_1;*/
+    return {
+      statusCode: 200,
+      body: outDt.data.getReader(),
+    };
   } catch (error) {
     return {
       statusCode: 500,
